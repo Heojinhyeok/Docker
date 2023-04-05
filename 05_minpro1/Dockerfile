@@ -1,0 +1,12 @@
+FROM centos:7
+
+RUN yum -y update && yum -y install vsftpd && yum clean all
+COPY vsftpd.conf.centos7.template /etc/vsftpd/vsftpd.conf
+
+VOLUME /var/ftp/pub
+COPY WelcomeToMyFTPserver.txt /var/ftp/pub/welcomeToMyFTPServer.txt
+
+EXPOSE 21 20
+
+ENTRYPOINT /usr/sbin/vsftpd
+
